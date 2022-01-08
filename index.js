@@ -3,30 +3,34 @@ const bodyParser = require('body-parser');
 const { exec } = require("child_process");
 const app = express();
 const port = process.env.PORT || 8000;;
-
+app.use(bodyParser.json())
 
 var fs = require('fs');
 const { stdout, stderr } = require("process");
+global.output = ""
 function run(code) {
-fs.writeFile('script.py',code, function (err) {
-    if (err) throw err; {
-    console.log("");
+    fs.writeFile('script.py',code, function (err) {
+        if (err) throw err; {
+            console.log("");
     }});
-exec("python3 script.py", (err, stdout, stderr) => {
-    var output = stdout
-    console.log(output)
-   /* app.get('/output', (req, res) => res.send(output));
-    app.listen(port, () => console.log(`Api output listening on port ${port}!`));
+    exec("python3 script.py", (err, stdout, stderr) => {
+        output = stdout
+        console.log(output)
+        /* app.get('/output', (req, res) => res.send(output));
+        app.listen(port, () => console.log(`Api output listening on port ${port}!`));
 */
+
+    //return output
+    })
     return output
-})
 }
 var code = ""
 app.post('/input', (req, res) => {
 code = req.body.code;
-res.send("Hello")
+console.log(run(code))
+res.send(run(code))
 
-app.get('/output', (req, res) => res.send(run(code)));
+/*app.get('/output', (req, res) => res.send(run(code)));*/
 
 });
 
