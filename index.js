@@ -24,6 +24,7 @@ exec("python3 script.py", (err, stdout, stderr) => {
 var code = ""
 app.post('/input', (req, res) => {
 code = req.body.code;
+res.send("Hello")
 
 app.get('/output', (req, res) => res.send(run(code)));
 
