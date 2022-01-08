@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { exec } = require("child_process");
 const app = express();
-const port = 80;
+const port = process.env.PORT || 8000;;
 
 
 var fs = require('fs');
