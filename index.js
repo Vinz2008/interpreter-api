@@ -5,7 +5,7 @@ const app = express();
 const port = process.env.PORT || 8000;;
 app.use(bodyParser.json())
 app.use((req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://vinz2008.github.io");
+    res.setHeader("Access-Control-Allow-Origin", "*");
     res.header(
       "Access-Control-Allow-Headers",
       "Origin, X-Requested-With, Content-Type, Accept"
