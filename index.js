@@ -1,9 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+import cors from 'cors';
 const { exec } = require("child_process");
 const app = express();
 const port = process.env.PORT || 8000;;
 app.use(bodyParser.json())
+app.use(cors({ origin: true }))
 
 var fs = require('fs');
 const { stdout, stderr } = require("process");
