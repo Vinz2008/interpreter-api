@@ -4,13 +4,15 @@ const { exec } = require("child_process");
 const app = express();
 const port = process.env.PORT || 8000;;
 app.use(bodyParser.json())
-app.use((req, res) => {
+/*app.use((req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.header(
       "Access-Control-Allow-Headers",
       "Origin, X-Requested-With, Content-Type, Accept"
     );
   });
+
+*/
 var fs = require('fs');
 const { stdout, stderr } = require("process");
 global.output = ""
