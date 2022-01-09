@@ -34,6 +34,8 @@ function run(code) {
 }
 var code = ""
 app.post('/input', (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     console.log("request")
 code = req.body.code;
 console.log(run(code))
