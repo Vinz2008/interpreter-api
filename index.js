@@ -4,7 +4,6 @@ const { exec } = require("child_process");
 const app = express();
 const port = process.env.PORT || 8000;;
 app.use(bodyParser.json())
-app.use(cors())
 app.use((req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.header(
