@@ -32,6 +32,7 @@ function run(code) {
 }
 var code = ""
 app.post('/input', (req, res) => {
+    console.log("request")
 code = req.body.code;
 console.log(run(code))
 res.send(run(code))
