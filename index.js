@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const { exec } = require("child_process");
 const app = express();
 const port = process.env.PORT || 8000;;
+const cors = require('cors');
+app.use(cors({origin: '*'}))
 app.use(bodyParser.json())
 /*app.use((req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -39,7 +41,7 @@ app.post('/input', (req, res) => {
 code = req.body.code;
 console.log(`code: ${code}`)
 console.log(run(code))
-res.send(run(code))
+res.status(200).send(run(code))
 
 /*app.get('/output', (req, res) => res.send(run(code)));*/
 
