@@ -19,7 +19,7 @@ global.output = ""
 function run(code) {
     fs.writeFile('script.py',code, function (err) {
         if (err) throw err; {
-            console.log("");
+            console.log("Error");
     }});
     exec("python3 script.py", (err, stdout, stderr) => {
         output = stdout
@@ -34,10 +34,10 @@ function run(code) {
 }
 var code = ""
 app.post('/input', (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    console.log("request")
+    /*res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");*/
 code = req.body.code;
+console.log(`code: ${code}`)
 console.log(run(code))
 res.send(run(code))
 
