@@ -1,3 +1,4 @@
+const Str = require('@supercharge/strings') 
 const express = require('express');
 const bodyParser = require('body-parser');
 const { exec } = require("child_process");
@@ -16,22 +17,47 @@ app.use(bodyParser.json())
 
 */
 var fs = require('fs');
+var randomId = "";
+var fileName = "";
 const { stdout, stderr } = require("process");
 global.output = ""
 function run(code) {
-    fs.writeFile('script.py',code, function (err) {
+    randomId = Str.random(50);
+    fileName = "script-" + randomId + ".py"    
+    fs.writeFile(fileName,code, function (err) {
         if (err) throw err; {
             console.log("Error");
-    }});
-    exec("python3 script.py", (err, stdout, stderr) => {
+    }
+        console.log(`${fileName} created`)
+        exec(`python3 ${fileName}`, (err, stdout, stderr) => {
+            output = stdout
+            console.log(`${fileName} executed`)
+            console.log(output)
+            fs.unlink(fileName, (err) => {
+                if (err) {
+                    throw err;
+                }
+            
+                console.log(`File ${fileName} is deleted.`);
+            });
+    });
+    /*exec(`python3 ${fileName}`, (err, stdout, stderr) => {
         output = stdout
-        console.log(output)
+        console.log(`${fileName} executed`)
+        console.log(output)*/
         /* app.get('/output', (req, res) => res.send(output));
         app.listen(port, () => console.log(`Api output listening on port ${port}!`));
 */
 
     //return output
     })
+    /*fs.unlink(fileName, (err) => {
+        if (err) {
+            throw err;
+        }
+    
+        console.log(`File ${fileName} is deleted.`);
+    });*/
     return output
 }
 var code = ""
@@ -40,8 +66,9 @@ app.post('/input', (req, res) => {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");*/
 code = req.body.code;
 console.log(`code: ${code}`)
-console.log(run(code))
-res.status(200).send(run(code))
+var function_output = run(code)
+console.log(function_output)
+res.status(200).send(function_output)
 
 /*app.get('/output', (req, res) => res.send(run(code)));*/
 
