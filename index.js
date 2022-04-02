@@ -72,7 +72,7 @@ code = req.body.code;
 console.log(`code: ${code}`)
 var function_output = run(code)
 
-console.log(function_output)
+console.log(`function_output : ${function_output}`)
 res.status(200).send(function_output)
 //console.log("output :" + output)
 //res.status(200).send(output)
